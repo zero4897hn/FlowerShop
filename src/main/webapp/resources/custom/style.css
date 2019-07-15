@@ -1,0 +1,42 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.flower-product-image {
+    position: relative;
+}
+
+.flower-product-image a {
+    color: white !important;
+    display: block;
+    width: max-content;
+    margin: auto;
+    margin-top: 24%;
+}
+
+.menu-of-product {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #060609;
+    top: 0;
+    left: 0;
+    text-align: center;
+    transition: all 1.4s;
+    opacity: 0;
+}
+
+.flower-product-image:hover .menu-of-product {
+    opacity: 0.8;
+}
+
+.flower-product-image:hover a {
+	cursor: pointer !important;
+    opacity: 1 !important;
+}
+
+md-toast.ng-scope._md.md-default-theme.md-top.md-right {
+    position: fixed;
+    z-index: 999999;
+}
