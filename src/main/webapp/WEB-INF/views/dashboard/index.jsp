@@ -180,6 +180,14 @@
                         </a>
                     </li>
                     <!-- /Quản lý đánh giá -->
+                    <!-- Quản lý thông tin trang -->
+                    <li>
+                        <a href="info_edit">
+                            <i class="material-icons" aria-hidden="true">info</i>
+                            <span>Quản lý thông tin trang</span>
+                        </a>
+                    </li>
+                    <!-- /Quản lý thông tin trang -->
                     <!-- Lịch sử tương tác -->
                     <li>
                         <a href="history">

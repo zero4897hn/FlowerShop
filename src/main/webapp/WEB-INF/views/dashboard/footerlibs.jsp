@@ -43,6 +43,9 @@
 <script type="text/javascript" src='<c:url value="/resources/vendor/angular-aria.min.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/resources/vendor/angular-messages.min.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/resources/vendor/angular-material.min.js"/>'></script>
+<script type="text/javascript" src='<c:url value="/resources/vendor/text-angular/textAngular-rangy.min.js"/>'></script>
+<script type="text/javascript" src='<c:url value="/resources/vendor/text-angular/textAngular-sanitize.min.js"/>'></script>
+<script type="text/javascript" src='<c:url value="/resources/vendor/text-angular/textAngular.min.js"/>'></script>
 <!-- end angular script -->
 
 <!-- custom script -->
@@ -65,4 +68,5 @@
 <script type="text/javascript" src='<c:url value="/resources/custom/dashboard/custom_product_rate.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/resources/custom/dashboard/custom_feedback_list.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/resources/custom/dashboard/custom_history.js"/>'></script>
+<script type="text/javascript" src='<c:url value="/resources/custom/dashboard/custom_info_page_edit.js"/>'></script>
 <!-- end custom script -->

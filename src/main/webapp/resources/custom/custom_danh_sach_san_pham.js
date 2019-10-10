@@ -38,6 +38,14 @@ app.controller('DanhSachSanPhamController', function($http, $scope, $rootScope, 
 		);
 	};
 
+	$scope.checkConHang = function(sanPham) {
+		var tongSoLuong = 0;
+		for (var i = 0; i < sanPham.danhSachKieuSanPham.length; i++) {
+			tongSoLuong = tongSoLuong + sanPham.danhSachKieuSanPham[i].soLuong;
+		}
+		sanPham.isSoldOut = (tongSoLuong == 0);
+	}
+
 	$scope.soSanPhamMoiTrang = 6;
 	$scope.trangHienTai = 1;
 

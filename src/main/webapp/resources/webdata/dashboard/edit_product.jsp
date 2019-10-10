@@ -18,12 +18,11 @@
 		</fieldset>
 		<fieldset class="form-group">
 			<label for="txtMoTaSanPham">Mô tả sản phẩm:</label>
-			<textarea class="form-control" id="txtMoTaSanPham" rows="3" ng-model="sanPham.moTa" placeholder="Nhập mô tả sản phẩm"></textarea>
+			<div text-angular ng-model="sanPham.moTa"></div>
 		</fieldset>
 		<fieldset class="form-group">
 			<label for="cboDanhMuc">Danh mục:</label>
 			<select class="form-control" id="cboDanhMuc" ng-model="sanPham.danhMuc.id" ng-required="true" ng-options="+(danhMuc.id) as danhMuc.tenDanhMuc for danhMuc in listDanhMuc">
-				
 			</select>
 		</fieldset>
 		<fieldset class="form-group">

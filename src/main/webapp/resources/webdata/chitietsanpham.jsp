@@ -72,10 +72,7 @@
             <h4>Mô tả</h4>
         </div>
         <div class="row">
-            <div class="col-12">
-                <p style="text-align: justify; text-justify: inter-word;">
-                    {{sanPham.moTa}}
-                </p>
+            <div class="col-12" ng-bind-html="sanPham.moTa" style="padding: 0 20px;">
             </div>
         </div>
     </div>

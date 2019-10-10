@@ -64,8 +64,23 @@
 				                        </td>
 				    				</tr>
 				    				<tr>
-				    					<td class="card-text" style="width: 35%;">Số lượng:</td>
-				                        <td class="card-text" style="width: 65%;">{{kieuSanPham.soLuong}}</td>
+				    					<td class="card-text align-middle" style="width: 35%;">Số lượng:</td>
+				                        <td class="card-text align-middle" style="width: 65%; height: 1px;">
+				                        	<div class="row form-group" style="padding: 0; margin: 0; height: 100%;" ng-init="kieuSanPham.isEnableAddQuantity = false">
+				                        		<div class="col-sm-2" style="height: 100%; vertical-align: middle; position: relative;">
+				                        			<div style="position: absolute; top: 25%;">{{kieuSanPham.soLuong}}</div>
+				                        		</div>
+				                        		<div class="col-sm-2">
+				                        			<button ng-click="kieuSanPham.isEnableAddQuantity = true" class="btn btn-outline-primary"><i class="material-icons" aria-hidden="true">add</i></button>
+				                        		</div>
+				                        		<div class="col-sm-6" ng-show="kieuSanPham.isEnableAddQuantity" ng-init="soLuongThem = 0">
+				                        			<input type="number" min="0" class="form-control" ng-model="soLuongThem">
+				                        		</div>
+				                        		<div class="col-sm-2" ng-show="kieuSanPham.isEnableAddQuantity">
+				                        			<button class="btn btn-outline-primary"><i class="material-icons" aria-hidden="true" ng-click="themSoLuong(kieuSanPham, soLuongThem)">check</i></button>
+				                        		</div>
+				                        	</div>
+				                    	</td>
 				    				</tr>
 				    				<tr>
 				    					<td class="card-text" style="width: 35%;">Ngày nhập:</td>
@@ -99,8 +114,7 @@
 				<div class="card-header">
 					Mô tả sản phẩm:
 				</div>
-				<div class="card-block">
-					{{sanPham.moTa}}
+				<div class="card-block" ng-bind-html="sanPham.moTa">
 				</div>
 			</div>
 		</div>

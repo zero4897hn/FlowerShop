@@ -44,13 +44,14 @@
     </div>
     
     <div class="row" ng-if="listSanPham.length > 0">
-        <div class="col-6 col-lg-3" ng-repeat="sanPham in listSanPham">
+        <div class="col-6 col-lg-3" ng-repeat="sanPham in listSanPham" ng-init="checkConHang(sanPham)">
             <div class="row">
                 <div class="col-12">
                     <div class="flower-product-image">
+                        <img src="/FlowerShop/resources/images/sold_out.png" width="100%" style="position: absolute; top: 25%;" ng-if="sanPham.isSoldOut">
                         <img ng-src="/FlowerShop/resources/images/products/{{sanPham.hinhAnh}}" width="100%" class="img-fluid square-image">
                         <div class="menu-of-product">
-                            <a class="btn btn-outline-warning" href="javascript:;" ng-click="themVaoGioHang(sanPham)">Thêm vào giỏ hàng</a>
+                            <a class="btn btn-outline-warning" href="javascript:;" ng-click="themVaoGioHang(sanPham)" ng-if="!sanPham.isSoldOut">Thêm vào giỏ hàng</a>
                             <a class="btn btn-outline-primary" href="chi_tiet_san_pham/{{sanPham.id}}">Xem chi tiết</a>
                         </div>
                     </div>

@@ -62,6 +62,10 @@ app.controller('ProductInfoController', function($http, $scope, $rootScope, $rou
 		$location.path('/product_edit/' + $scope.sanPham.id)
 	}
 
+	$scope.enableThemSoLuong = function() {
+		$scope.isEnableAddQuantity = true;
+	}
+
 	$scope.xoaSanPham = function(item) {
 		if ($rootScope.nhanVienHienTai.chucVu.id < 3) {
 			var contextDialog = 'Bạn có chắc chắn muốn xóa sản phẩm này? Sau khi xóa sẽ không thể hoàn tác.';
@@ -153,6 +157,28 @@ app.controller('ProductInfoController', function($http, $scope, $rootScope, $rou
 			});
 		}, function() {
 
+		});
+	}
+
+	$scope.themSoLuong = function(kieuSanPham, soLuongThem) {
+		$http.post('/FlowerShop/api/cap_nhat_kieu_san_pham', angular.toJson({
+			id: kieuSanPham.id,
+			soLuong: kieuSanPham.soLuong + soLuongThem
+		}), {
+			headers: {
+				'content-type': 'application/json;charset=UTF-8'
+			}
+		}).then(function(response) {
+			var notification = response.data.notice;
+			if (notification == 'success') {
+				kieuSanPham.soLuong = kieuSanPham.soLuong + soLuongThem;
+				kieuSanPham.isEnableAddQuantity = false;
+			}
+			else {
+				$scope.showSimpleToast(notification);
+			}
+		}, function(error) {
+			console.log(error);
 		});
 	}
 

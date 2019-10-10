@@ -12,7 +12,7 @@
 		</fieldset>
 		<fieldset class="form-group">
 			<label for="txtMoTaSanPham">Mô tả sản phẩm:</label>
-			<textarea class="form-control" id="txtMoTaSanPham" rows="5" ng-model="sanPham.moTa" placeholder="Nhập mô tả sản phẩm"></textarea>
+			<div text-angular ng-model="sanPham.moTa"></div>
 		</fieldset>
 		<fieldset class="form-group">
 			<label for="cboDanhMuc">Danh mục:</label>

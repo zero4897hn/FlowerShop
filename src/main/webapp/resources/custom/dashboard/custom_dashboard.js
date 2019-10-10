@@ -1,5 +1,5 @@
 ﻿'use strict';
-var app = angular.module('myApp', ['ngMaterial', 'ngRoute', 'ngCookies']);
+var app = angular.module('myApp', ['ngMaterial', 'ngRoute', 'ngCookies', 'textAngular']);
 
 app.directive('fileModel', ['$parse', function ($parse) {
 	return {
@@ -194,6 +194,10 @@ app.config(function ($routeProvider, $locationProvider) {
 	.when('/feedback_list', {
 		templateUrl: '/FlowerShop/resources/webdata/dashboard/list_of_feedbacks.jsp',
 		controller: 'FeedbackListController'
+	})
+	.when('/info_edit', {
+		templateUrl: '/FlowerShop/resources/webdata/dashboard/edit_info_page.jsp',
+		controller: 'InfoPageEditController'
 	})
 	.when('/product_rate', {
 		templateUrl: '/FlowerShop/resources/webdata/dashboard/rate_product.jsp',

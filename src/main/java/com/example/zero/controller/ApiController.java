@@ -1048,7 +1048,10 @@ public class ApiController {
 				if (hoaDonDAO.capNhatHoaDon(hoaDon)) {
 					TuongTac tuongTac = new TuongTac();
 					tuongTac.setNhanVien(nhanVien);
-					if (hoaDon.getTinhTrang() == 1) {
+					if (hoaDon.getTinhTrang() == 0) {
+						tuongTac.setNoiDung("đã hoàn tác tiến hành giao hóa đơn " + hoaDon.getMaHoaDon());
+					}
+					else if (hoaDon.getTinhTrang() == 1) {
 						tuongTac.setNoiDung("đã xác nhận và tiến hành giao hóa đơn " + hoaDon.getMaHoaDon());
 					}
 					else if (hoaDon.getTinhTrang() == 2) {
@@ -1429,6 +1432,13 @@ public class ApiController {
 				TrangChu trangChu = trangChuDAO.getTrangChu("chanTrang");
 				trangChu.setTenTruong("chanTrang");
 				trangChu.setNoiDung(jsonNode.get("chanTrang").toString());
+				if (!trangChuDAO.updateTrangChu(trangChu)) success = false;
+			}
+			
+			if (jsonNode.has("thongTin")) {
+				TrangChu trangChu = trangChuDAO.getTrangChu("thongTin");
+				trangChu.setTenTruong("thongTin");
+				trangChu.setNoiDung(jsonNode.get("thongTin").asText());
 				if (!trangChuDAO.updateTrangChu(trangChu)) success = false;
 			}
 			
@@ -2254,5 +2264,43 @@ public class ApiController {
 			e.printStackTrace();
 		}
 		return "";
+	}
+	
+	@PostMapping(path = "cap_nhat_kieu_san_pham", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String capNhatKieuSanPham(@RequestBody(required = false) String dataOfJson, HttpServletRequest request) {
+		try {
+			NhanVien nhanVien = null;
+			
+			List<Cookie> cookies = Arrays.asList(request.getCookies());
+			Optional<Cookie> cookieOption = cookies.stream().filter(x -> x.getName().equals("id_nhan_vien_hien_tai")).findFirst();
+			if (cookieOption.isPresent()) {
+				Cookie cookie = cookieOption.get();
+				nhanVien = nhanVienDAO.getNhanVien(Integer.parseInt(cookie.getValue().toString()));
+			}
+			
+			ObjectMapper objectMapper = new ObjectMapper();
+			JsonNode jsonNode = objectMapper.readTree(dataOfJson.toString());
+			if (jsonNode.has("id")) {
+				KieuSanPham kieuSanPham = kieuSanPhamDAO.getKieuSanPham(jsonNode.get("id").asInt());
+				if (jsonNode.has("soLuong")) {
+					int soLuongCu = kieuSanPham.getSoLuong();
+					kieuSanPham.setSoLuong(jsonNode.get("soLuong").asInt());
+					TuongTac tuongTac = new TuongTac();
+					tuongTac.setNhanVien(nhanVien);
+					tuongTac.setIdTuongTac(kieuSanPham.getSanPham().getId());
+					tuongTac.setTenTuongTac(kieuSanPham.getSanPham().getTenSanPham());
+					tuongTac.setTruongTuongTac("san_pham");
+					tuongTac.setNoiDung("Đã thay đổi số lượng " + kieuSanPham.getTenKieu() + " từ " + soLuongCu + " thành " + kieuSanPham.getSoLuong() + " trong sản phẩm ");
+					tuongTacDAO.themTuongTac(tuongTac);
+				}
+				kieuSanPhamDAO.capNhatKieuSanPham(kieuSanPham);
+				return "{\"notice\": \"success\"}";
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "{\"notice\": \"Có lỗi trong quá trình kết nối, vui lòng thử lại sau.\"}";
 	}
 }

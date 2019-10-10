@@ -13,8 +13,9 @@
 <link rel="stylesheet" href='<c:url value="/resources/styles/app.css"/>' id="load_styles_before">
 <link rel="stylesheet" href='<c:url value="/resources/styles/app.skins.css"/>'>
 <link rel="stylesheet" href='<c:url value="/resources/vendor/multiselect/css/multi-select.css"/>'>
-
 <!-- endbuild -->
+
 <!-- custom libraries  -->
 <link rel="stylesheet" href='<c:url value="/resources/vendor/angular-material.min.css"/>'>
+<link rel="stylesheet" href='<c:url value="/resources/vendor/text-angular/textAngular.css"/>'>
 <!-- end custom libraries  -->

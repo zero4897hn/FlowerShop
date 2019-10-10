@@ -83,6 +83,14 @@ app.controller('TrangChuController', function($http, $scope, $rootScope, $filter
 		console.log(error);
 	});
 
+	$scope.checkConHang = function(sanPham) {
+		var tongSoLuong = 0;
+		for (var i = 0; i < sanPham.danhSachKieuSanPham.length; i++) {
+			tongSoLuong = tongSoLuong + sanPham.danhSachKieuSanPham[i].soLuong;
+		}
+		sanPham.isSoldOut = (tongSoLuong == 0);
+	}
+
 	$scope.setMinAndMax = function(item) {
 		item.danhSachKieuSanPham.forEach(function(value) {
 			value.giaTien = $scope.getGiaKhuyenMai(value);
