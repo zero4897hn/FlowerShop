@@ -25,6 +25,9 @@ public class HoaDonDAO {
 			hoaDon.getDanhSachDonHang().forEach(x -> {
 				session.save(x);
 			});
+			hoaDon.getDanhSachQuaTrinh().forEach(x -> {
+				session.save(x);
+			});
 			return true;
 		}
 		catch (Exception e) {

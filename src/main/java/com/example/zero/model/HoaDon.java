@@ -42,10 +42,6 @@ public class HoaDon {
 	private String soDienThoai;
 	@Column(name = "ghi_chu")
 	private String ghiChu;
-	@Column(name = "tinh_trang")
-	private int tinhTrang;
-	@Column(name = "nguyen_nhan")
-	private String nguyenNhan;
 	@Column(name = "da_xem")
 	private boolean daXem;
 	@Column(name = "ngay_lap")
@@ -56,6 +52,12 @@ public class HoaDon {
 			CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
 	})
 	private List<DonHang> danhSachDonHang;
+	@JsonManagedReference
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "hoaDon", cascade = {
+			CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
+	})
+	private List<QuaTrinhVanChuyen> danhSachQuaTrinh;
 	public int getId() {
 		return id;
 	}
@@ -74,18 +76,6 @@ public class HoaDon {
 	public void setSoDienThoai(String soDienThoai) {
 		this.soDienThoai = soDienThoai;
 	}
-	public int getTinhTrang() {
-		return tinhTrang;
-	}
-	public void setTinhTrang(int tinhTrang) {
-		this.tinhTrang = tinhTrang;
-	}
-	public String getNguyenNhan() {
-		return nguyenNhan;
-	}
-	public void setNguyenNhan(String nguyenNhan) {
-		this.nguyenNhan = nguyenNhan;
-	}
 	public List<DonHang> getDanhSachDonHang() {
 		return danhSachDonHang;
 	}
@@ -95,6 +85,16 @@ public class HoaDon {
 		}
 		danhSachDonHang.add(donHang);
 		donHang.setHoaDon(this);
+	}
+	public List<QuaTrinhVanChuyen> getDanhSachQuaTrinh() {
+		return danhSachQuaTrinh;
+	}
+	public void addQuaTrinh(QuaTrinhVanChuyen quaTrinhVanChuyen) {
+		if (danhSachQuaTrinh == null) {
+			danhSachQuaTrinh = new ArrayList<QuaTrinhVanChuyen>();
+		}
+		danhSachQuaTrinh.add(quaTrinhVanChuyen);
+		quaTrinhVanChuyen.setHoaDon(this);
 	}
 	public NhanVien getNhanVien() {
 		return nhanVien;

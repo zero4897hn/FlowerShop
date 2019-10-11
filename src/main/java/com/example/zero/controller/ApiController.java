@@ -50,7 +50,9 @@ import com.example.zero.dao.KhuyenMaiDAO;
 import com.example.zero.dao.KieuSanPhamDAO;
 import com.example.zero.dao.NhanVienDAO;
 import com.example.zero.dao.PhanHoiDAO;
+import com.example.zero.dao.QuaTrinhVanChuyenDAO;
 import com.example.zero.dao.SanPhamDAO;
+import com.example.zero.dao.TinhTrangHoaDonDAO;
 import com.example.zero.dao.TraLoiDanhGiaDAO;
 import com.example.zero.dao.TrangChuDAO;
 import com.example.zero.dao.TuongTacDAO;
@@ -66,6 +68,8 @@ import com.example.zero.model.KieuSanPham;
 import com.example.zero.model.NhanVien;
 import com.example.zero.model.PhanHoi;
 import com.example.zero.model.SanPham;
+import com.example.zero.model.TinhTrangHoaDon;
+import com.example.zero.model.QuaTrinhVanChuyen;
 import com.example.zero.model.TraLoiDanhGia;
 import com.example.zero.model.TrangChu;
 import com.example.zero.model.TuongTac;
@@ -113,6 +117,12 @@ public class ApiController {
 	
 	@Autowired
 	TuongTacDAO tuongTacDAO;
+	
+	@Autowired
+	QuaTrinhVanChuyenDAO quaTrinhVanChuyenDAO;
+	
+	@Autowired
+	TinhTrangHoaDonDAO tinhTrangHoaDonDAO;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -292,6 +302,10 @@ public class ApiController {
 					kieuSanPham.setLuongMua(kieuSanPham.getLuongMua() + 1);
 					kieuSanPhamDAO.capNhatKieuSanPham(kieuSanPham);
 				}
+				
+				QuaTrinhVanChuyen quaTrinhVanChuyen = new QuaTrinhVanChuyen();
+				quaTrinhVanChuyen.setTinhTrangHoaDon(tinhTrangHoaDonDAO.getById(1));
+				hoaDon.addQuaTrinh(quaTrinhVanChuyen);
 				
 				if (hoaDonDAO.luuHoaDon(hoaDon)) return "{\"notice\": \"success\", \"id_hoa_don\": \"" + hoaDonDAO.getHoaDon(hoaDon.getId()).getMaHoaDon() + "\"}";
 				else return "{\"notice\": \"Đặt hàng thất bại\"}";
@@ -1026,6 +1040,19 @@ public class ApiController {
 		return "";
 	}
 	
+	@PostMapping(path = "get_danh_sach_tinh_trang_hoa_don", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String getDanhSachTinhTrangHoaDon() {
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			return objectMapper.writeValueAsString(tinhTrangHoaDonDAO.getAll());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
 	@PostMapping(path = "doi_tinh_trang_hoa_don", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String doiTinhTrangHoaDon(@RequestBody(required = false) String dataOfJson, HttpServletRequest request) {
@@ -1041,29 +1068,29 @@ public class ApiController {
 			
 			ObjectMapper objectMapper = new ObjectMapper();
 			JsonNode jsonNode = objectMapper.readTree(dataOfJson.toString());
-			if (jsonNode.has("idHoaDon") && jsonNode.has("tinhTrang")) {
+			if (jsonNode.has("idHoaDon")) {
 				HoaDon hoaDon = hoaDonDAO.getHoaDon(jsonNode.get("idHoaDon").asInt());
-				hoaDon.setTinhTrang(jsonNode.get("tinhTrang").asInt());
-				if (jsonNode.has("lyDo")) hoaDon.setNguyenNhan(jsonNode.get("lyDo").asText());
-				if (hoaDonDAO.capNhatHoaDon(hoaDon)) {
+				QuaTrinhVanChuyen quaTrinhVanChuyen = new QuaTrinhVanChuyen();
+				TinhTrangHoaDon tinhTrangHoaDon = null;
+				if (jsonNode.has("tinhTrangCanChuyen")) {
+					tinhTrangHoaDon = tinhTrangHoaDonDAO.getById(jsonNode.get("tinhTrangCanChuyen").asInt());
+				}
+				quaTrinhVanChuyen.setTinhTrangHoaDon(tinhTrangHoaDon);
+				if (jsonNode.has("ghiChu") && !jsonNode.get("ghiChu").asText().equals("null")) {
+					quaTrinhVanChuyen.setGhiChu(jsonNode.get("ghiChu").asText());
+				}
+				quaTrinhVanChuyen.setHoaDon(hoaDon);
+				quaTrinhVanChuyenDAO.save(quaTrinhVanChuyen);
+				
+				if (nhanVien != null) {
 					TuongTac tuongTac = new TuongTac();
 					tuongTac.setNhanVien(nhanVien);
-					if (hoaDon.getTinhTrang() == 0) {
-						tuongTac.setNoiDung("đã hoàn tác tiến hành giao hóa đơn " + hoaDon.getMaHoaDon());
-					}
-					else if (hoaDon.getTinhTrang() == 1) {
-						tuongTac.setNoiDung("đã xác nhận và tiến hành giao hóa đơn " + hoaDon.getMaHoaDon());
-					}
-					else if (hoaDon.getTinhTrang() == 2) {
-						tuongTac.setNoiDung("đã xác nhận đã giao cho khách hóa đơn " + hoaDon.getMaHoaDon());
-					}
-					else if (hoaDon.getTinhTrang() == -1) {
-						tuongTac.setNoiDung("đã hủy hóa đơn " + hoaDon.getMaHoaDon());
-					}
+					tuongTac.setTruongTuongTac("khuyen_mai");
+					tuongTac.setNoiDung("đã cập nhật trạng thái cho hóa đơn " + hoaDon.getMaHoaDon());
 					tuongTacDAO.themTuongTac(tuongTac);
-					return "{\"notice\": \"success\"}";
 				}
-				else return "{\"notice\": \"Cập nhật thất bại\"}";
+				
+				return "{\"notice\": \"success\", \"qua_trinh\": " + objectMapper.writeValueAsString(quaTrinhVanChuyen) + "}";
 			}
 		}
 		catch (Exception e) {

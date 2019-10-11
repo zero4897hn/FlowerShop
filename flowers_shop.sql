@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2019 at 10:27 AM
+-- Generation Time: Oct 11, 2019 at 12:08 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -196,23 +196,8 @@ CREATE TABLE `don_hang` (
 --
 
 INSERT INTO `don_hang` (`id`, `id_kieu_san_pham`, `id_hoa_don`, `so_luong`, `thanh_tien`) VALUES
-(1, 7, 1, 1, 1500000),
-(2, 3, 1, 1, 1800000),
-(3, 2, 1, 1, 350000),
-(4, 3, 2, 1, 1800000),
-(6, 16, 2, 1, 500000),
-(7, 7, 3, 1, 1500000),
-(8, 2, 3, 1, 350000),
-(9, 28, 3, 1, 1700000),
-(10, 3, 4, 5, 9000000),
-(11, 28, 4, 1, 1700000),
-(12, 16, 4, 1, 500000),
-(13, 25, 4, 6, 2100000),
-(14, 3, 5, 5, 9000000),
-(15, 29, 5, 1, 1200000),
-(16, 25, 6, 1, 350000),
-(17, 14, 6, 1, 350000),
-(18, 3, 6, 1, 1800000);
+(5, 25, 3, 1, 350000),
+(6, 28, 3, 1, 1700000);
 
 -- --------------------------------------------------------
 
@@ -228,8 +213,6 @@ CREATE TABLE `hoa_don` (
   `dia_chi_giao_hang` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `so_dien_thoai` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `ghi_chu` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tinh_trang` int(11) NOT NULL DEFAULT '0',
-  `nguyen_nhan` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `da_xem` bit(1) NOT NULL,
   `ngay_lap` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -238,13 +221,8 @@ CREATE TABLE `hoa_don` (
 -- Dumping data for table `hoa_don`
 --
 
-INSERT INTO `hoa_don` (`id`, `ma_hoa_don`, `id_nhan_vien`, `ho_ten_nguoi_nhan`, `dia_chi_giao_hang`, `so_dien_thoai`, `ghi_chu`, `tinh_trang`, `nguyen_nhan`, `da_xem`, `ngay_lap`) VALUES
-(1, '8FC1A156-9956-11E9-9', 1, 'Bùi Tuấn Đạt', '99 tổ 28 ngõ 250 Kim Giang, Hoàng Mai, Hà Nội', '0972753644', NULL, 2, NULL, b'0', '2019-06-28 10:40:52'),
-(2, '99DE2F78-9956-11E9-9', 1, 'Bùi Tuấn Đạt', '99 tổ 28 ngõ 250 Kim Giang, Hoàng Mai, Hà Nội', '0972753644', NULL, 0, NULL, b'0', '2019-06-28 10:41:09'),
-(3, 'DAAE0E53-9A7E-11E9-9', 1, 'Bùi Tuấn Đạt', '99 tổ 28 ngõ 250 Kim Giang, Hoàng Mai, Hà Nội', '0972753644', NULL, -1, NULL, b'0', '2019-06-29 22:01:44'),
-(4, '75AE6CFE-9F0C-11E9-9', 1, 'Bùi Tuấn Đạt', '99 tổ 28 ngõ 250 Kim Giang, Hoàng Mai, Hà Nội', '0972753644', NULL, 0, NULL, b'0', '2019-07-05 17:05:46'),
-(5, '3D7E94B0-A375-11E9-9', 1, 'Bùi Tuấn Đạt', '99 tổ 28 ngõ 250 Kim Giang, Hoàng Mai, Hà Nội', '0972753644', NULL, -1, NULL, b'1', '2019-07-11 07:45:49'),
-(6, '93EAF3D4-A6CB-11E9-9', 1, 'Bùi Tuấn Đạt', '99 tổ 28 ngõ 250 Kim Giang, Hoàng Mai, Hà Nội', '0972753644', NULL, 1, NULL, b'1', '2019-07-15 13:41:25');
+INSERT INTO `hoa_don` (`id`, `ma_hoa_don`, `id_nhan_vien`, `ho_ten_nguoi_nhan`, `dia_chi_giao_hang`, `so_dien_thoai`, `ghi_chu`, `da_xem`, `ngay_lap`) VALUES
+(3, '0B77FA00-EC07-11E9-9', 1, 'Bùi Tuấn Đạt', '99 tổ 28 ngõ 250 Kim Giang, Hoàng Mai, Hà Nội', '0972753644', NULL, b'1', '2019-10-11 16:10:59');
 
 --
 -- Triggers `hoa_don`
@@ -305,13 +283,13 @@ CREATE TABLE `kieu_san_pham` (
 
 INSERT INTO `kieu_san_pham` (`id`, `id_san_pham`, `ten_kieu`, `gia_tien`, `so_luong`, `luong_mua`, `ngay_nhap`) VALUES
 (2, 2, 'Phút Yêu Đầu 2', 350000, 24, 3, '2019-05-06 11:33:42'),
-(3, 3, 'Nắng yêu thương', 1800000, 39, 5, '2019-05-06 11:36:18'),
-(4, 3, 'Cắm tròn hai mặt', 2500000, 60, 0, '2019-05-06 11:36:18'),
-(5, 4, 'Memory Of Love', 450000, 59, 0, '2019-05-06 11:38:39'),
-(7, 6, 'Phồn Vinh', 1500000, 41, 3, '2019-05-08 16:40:36'),
+(3, 3, 'Nắng yêu thương', 1800000, 72, 6, '2019-05-06 11:36:18'),
+(4, 3, 'Cắm tròn hai mặt', 2500000, 72, 0, '2019-05-06 11:36:18'),
+(5, 4, 'Memory Of Love', 450000, 60, 0, '2019-05-06 11:38:39'),
+(7, 6, 'Phồn Vinh', 1500000, 0, 4, '2019-05-08 16:40:36'),
 (8, 7, 'Bó hoa tươi Dịu Dàng', 600000, 30, 0, '2019-05-07 13:28:27'),
 (9, 8, 'Red Rose', 2000000, 39, 0, '2019-05-07 13:30:31'),
-(14, 13, 'Hồn Nhiên', 350000, 27, 1, '2019-05-08 15:25:34'),
+(14, 13, 'Hồn Nhiên', 350000, 24, 2, '2019-05-08 15:25:34'),
 (16, 15, 'Khởi đầu mới', 500000, 41, 2, '2019-05-08 15:30:05'),
 (17, 15, 'Cắm tròn hai mặt', 600000, 50, 0, '2019-05-08 15:30:05'),
 (19, 17, 'Success Flowers', 900000, 50, 0, '2019-05-08 15:35:50'),
@@ -319,11 +297,11 @@ INSERT INTO `kieu_san_pham` (`id`, `id_san_pham`, `ten_kieu`, `gia_tien`, `so_lu
 (21, 18, 'Cắm tròn hai mặt', 500000, 100, 0, '2019-05-08 15:38:51'),
 (23, 21, 'Lời tỏ tình', 600000, 100, 0, '2019-05-08 15:58:41'),
 (24, 22, 'First Kiss', 500000, 500, 0, '2019-05-08 16:00:49'),
-(25, 23, NULL, 350000, 492, 2, '2019-05-08 16:02:41'),
+(25, 23, NULL, 350000, 477, 7, '2019-05-08 16:02:41'),
 (26, 24, 'Gold Love', 300000, 300, 0, '2019-05-08 16:04:19'),
-(27, 25, NULL, 1400000, 140, 0, '2019-05-08 16:05:41'),
-(28, 26, NULL, 1700000, 77, 3, '2019-05-08 16:06:52'),
-(29, 27, 'null', 1200000, 39, 1, '2019-05-08 16:09:03'),
+(27, 25, NULL, 1400000, 139, 1, '2019-05-08 16:05:41'),
+(28, 26, NULL, 1700000, 70, 7, '2019-05-08 16:06:52'),
+(29, 27, 'null', 1200000, 35, 2, '2019-05-08 16:09:03'),
 (37, 29, 'In Your Eyes', 1400000, 50, 0, '2019-06-15 14:56:55'),
 (38, 30, 'Yêu Thương Hạnh Phúc', 350000, 48, 0, '2019-06-15 14:59:58'),
 (39, 31, 'Purple Love', 2400000, 1000, 0, '2019-06-15 15:02:48'),
@@ -414,6 +392,44 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `qua_trinh_van_chuyen`
+--
+
+CREATE TABLE `qua_trinh_van_chuyen` (
+  `id` int(11) NOT NULL,
+  `id_hoa_don` int(11) NOT NULL,
+  `id_tinh_trang` int(11) NOT NULL,
+  `ghi_chu` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ngay_dien_ra` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `qua_trinh_van_chuyen`
+--
+
+INSERT INTO `qua_trinh_van_chuyen` (`id`, `id_hoa_don`, `id_tinh_trang`, `ghi_chu`, `ngay_dien_ra`) VALUES
+(1, 3, 1, NULL, '2019-10-11 16:10:59'),
+(2, 3, 2, NULL, '2019-10-11 16:51:14'),
+(3, 3, 3, NULL, '2019-10-11 16:52:09'),
+(4, 3, 4, 'avc', '2019-10-11 16:53:31'),
+(5, 3, 5, NULL, '2019-10-11 16:57:19'),
+(6, 3, 4, 'fdsgsd', '2019-10-11 16:59:29'),
+(7, 3, 5, NULL, '2019-10-11 17:05:15'),
+(8, 3, 5, NULL, '2019-10-11 17:06:53');
+
+--
+-- Triggers `qua_trinh_van_chuyen`
+--
+DELIMITER $$
+CREATE TRIGGER `AddNgayDienRa` BEFORE INSERT ON `qua_trinh_van_chuyen` FOR EACH ROW BEGIN
+	SET new.ngay_dien_ra = now();
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `san_pham`
 --
 
@@ -434,7 +450,7 @@ CREATE TABLE `san_pham` (
 INSERT INTO `san_pham` (`id`, `ten_san_pham`, `hinh_anh`, `mo_ta`, `id_danh_muc`, `ban_ra`, `da_xoa`) VALUES
 (2, 'Bó hoa tươi Phút Yêu Đầu 2', 'phut_yeu_dau.jpg', 'Với tone màu hồng nhẹ nhàng, nữ tính. Bó hoa là món quà tuyệt vời dành tặng cho những bạn nữ yêu thích sự lãng mạn và tràn đầy yêu thương. Thích hợp tặng dịp sinh nhật, làm quen, kỷ niệm...', 1, b'1', b'1'),
 (3, 'Bình hoa tươi Nắng Yêu Thương', 'nang_yeu_thuong.jpg', 'Được thiết kế hài hòa giữa tông màu nhẹ của hoa cúc PingPong và hoa hồng vàng tạo ra những đường nét hài hòa, nhẹ nhàng. Là những cánh địa lan đầy nét tinh khiết hay hơi thở của các loài ngưng tự lại tạo nên sắc vàng của sự thành công, của màu nắng yêu thương hằng ngày sưởi ấm con tim mỗi người chúng ta. Thích hợp tặng cho người thân,bạn bè đồng nghiệp trong ngày khai trương, chúc mừng và những ngày hội họp...', 1, b'1', b'0'),
-(4, 'Bó hoa tươi Memory Of Love', 'memory_of_love.png', 'Bó hoa của những dịu dàng, những ngây thơ và cả những hoài niệm về những phút giây đầu gặp gỡ. Ký ức về tình yêu đôi ta thật tự nhiên, đằm thắm mà vẫn để lại biết bao xúc cảm trong lòng của ta. Đó là những kỉ niệm đẹp, chỉ nghĩ cần đến thôi thì nụ cười hạnh phúc bất chợt nở trên mội.\r\nBó hoa tươi Memory Of Love gồm các loại hoa:\r\n- 15 hoa hồng tím\r\n- Cẩm chướng vàng \r\n- Hoa lá phụ khác\r\n- Giấy gói - nơ xuất xứ Hàn Quốc', 2, b'1', b'0'),
+(4, 'Bó hoa tươi Memory Of Love', 'memory_of_love.png', '<p>Bó hoa của những dịu dàng, những ngây thơ và cả những hoài niệm về những phút giây đầu gặp gỡ. Ký ức về tình yêu đôi ta thật tự nhiên, đằm thắm mà vẫn để lại biết bao xúc cảm trong lòng của ta. Đó là những kỉ niệm đẹp, chỉ nghĩ cần đến thôi thì nụ cười hạnh phúc bất chợt nở trên mội.</p><p>Bó hoa tươi Memory Of Love gồm các loại hoa:</p><p></p><ul><li>15 hoa hồng tím</li></ul><p></p><ul><li>Cẩm chướng vàng </li></ul><p><ul><li>Hoa lá phụ khác</li></ul></p><ul><li>Giấy gói </li></ul><ul><li>Nơ xuất xứ Hàn Quốc</li></ul>', 2, b'1', b'0'),
 (6, 'Kệ chúc mừng Phồn Vinh', 'phon_vinh.jpg', 'Kệ hoa chúc mừng \"Phồn vinh\" như chính ý nghĩa của nó giàu có, thịnh vượng,là lời chúc cho sự phát triển tốt đẹp. Tone màu hồng của hoa ly và hoa đồng tiền chắc chắn sẽ là món quà tặng đặc biệt dành cho khai trương, kỷ niệm thành lập công ty, chúc mừng đối tác...', 3, b'1', b'0'),
 (7, 'Bó hoa tươi Dịu Dàng', 'diu_dang.jpg', 'Với tone màu hồng pastel nhẹ nhàng và tràn đầy nữ tính như sự dịu dàng, đằm thắm của những cô thiếu nữ xinh xắn tuổi trăng tròn. Hoa hồng da kết hợp cùng cát tường hồng và baby trắng chắc chắn sẽ là điều bất ngờ và sang trọng dành tặng cho những cô gái đáng yêu.\r\nBó hoa tươi Dịu Dàng gồm các loại hoa:\r\n- 12 hoa hồng da\r\n- Cát tường hồng\r\n- Cát tường tím\r\n- Baby trắng\r\n- Hoa lá phụ khác\r\n- Giấy gói, nơ xuất xứ HQ', 1, b'1', b'0'),
 (8, 'Bình hoa tươi Red Rose', 'red_rose.jpg', 'Bình hoa với hoa hồng đỏ là chủ đạo được bạn florist thiết kế đặc biệt dùng để tặng cho những fan cuồng hoa hồng đỏ. Loài hoa được yêu thích nhất trong các màu của hoa hồng. Bình hoa sẽ là món quà tuyệt vời dành tặng cho người thân yêu của bạn.\r\nBình hoa tươi Red Roses gồm các loại hoa:\r\n- 10 hoa hồng đỏ Rednaomi\r\n- Hoa hồng đỏ sasa\r\n- Baby trắng nhập\r\n- Chuỗi ngọc đỏ\r\n- Hoa lá phụ khác', 1, b'1', b'0'),
@@ -472,6 +488,28 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tinh_trang_hoa_don`
+--
+
+CREATE TABLE `tinh_trang_hoa_don` (
+  `id` int(11) NOT NULL,
+  `ten_tinh_trang` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tinh_trang_hoa_don`
+--
+
+INSERT INTO `tinh_trang_hoa_don` (`id`, `ten_tinh_trang`) VALUES
+(1, 'Khởi tạo'),
+(2, 'Đã tiếp nhận'),
+(3, 'Đang chuyển'),
+(4, 'Trì hoãn'),
+(5, 'Hủy');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `trang_chu`
 --
 
@@ -490,7 +528,8 @@ INSERT INTO `trang_chu` (`id`, `ten_truong`, `noi_dung`) VALUES
 (2, 'noiDung', '[{\"kiHieu\":\"truck\",\"tieuDe\":\"Miễn phí vận chuyển\"},{\"kiHieu\":\"tags\",\"tieuDe\":\"Giá đảm bảo\",\"noiDung\":\"Đảm bảo giá tốt nhất cho tất cả sản phẩm\"},{\"kiHieu\":\"phone-square\",\"tieuDe\":\"Hỗ trợ miễn phí\",\"noiDung\":\"Ngày thường: 8h ~ 18h <br/> Cuối tuần: 8h ~ 16h\"}]'),
 (3, 'sanPham', '{\"sanPhamHot\":true,\"soLuongSanPham\":\"8\",\"danhSachIdSanPham\":[2,6,3,26,15,27,25,24]}'),
 (4, 'nhungBanDo', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29784.636441564642!2d105.71619531938794!3d21.069484552469355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313455aa15919acf%3A0xd83f79a5852943f6!2zVMOieSBU4buxdSwgQuG6r2MgVOG7qyBMacOqbSwgSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1555392453829!5m2!1svi!2s\" width=\"100%\" height=\"600px\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>'),
-(5, 'chanTrang', '{\"benTrai\":{\"noiDung\":[\"Ngày thường: 9h ~ 21h\",\"Cuối tuần: 9h ~ 18h\"],\"tieuDe\":\"Giờ mở cửa\"},\"xaHoi\":[{\"kiHieu\":\"facebook\",\"duongDan\":\"#\"},{\"kiHieu\":\"twitter\",\"duongDan\":\"#\"},{\"kiHieu\":\"instagram\",\"duongDan\":\"#\"},{\"kiHieu\":\"google-plus\",\"duongDan\":\"#\"}],\"benPhai\":{\"noiDung\":[\"số XX ngõ XXX Tây Tựu, quận Bắc Từ Liêm\",\"zero4897hncool@gmail.com\",\"Số điện thoại: 0987124XXX\"],\"tieuDe\":\"Liên hệ\"}}');
+(5, 'chanTrang', '{\"benTrai\":{\"noiDung\":[\"Ngày thường: 9h ~ 21h\",\"Cuối tuần: 9h ~ 18h\"],\"tieuDe\":\"Giờ mở cửa\"},\"xaHoi\":[{\"kiHieu\":\"facebook\",\"duongDan\":\"#\"},{\"kiHieu\":\"twitter\",\"duongDan\":\"#\"},{\"kiHieu\":\"instagram\",\"duongDan\":\"#\"},{\"kiHieu\":\"google-plus\",\"duongDan\":\"#\"}],\"benPhai\":{\"noiDung\":[\"số XX ngõ XXX Tây Tựu, quận Bắc Từ Liêm\",\"zero4897hncool@gmail.com\",\"Số điện thoại: 0987124XXX\"],\"tieuDe\":\"Liên hệ\"}}'),
+(6, 'thongTin', '<p style=\"text-align: justify;\">Làng hoa Tây Tựu, cách trung tâm Hà Nội 20 km về phía Tây, là nơi cung cấp hoa chủ lực cho Thủ đô và các vùng lân cận. Nghề trồng hoa tại Tây Tựu được hình thành từ năm 1930 nhưng phải đến đầu những năm 90, người dân mới bắt đầu tập trung trồng hoa. Nhiều người dân Tây Tựu vẫn nhớ, những cây hoa đầu tiên được đưa về trồng thí điểm thay cho các loại cây trồng truyền thống như lúa, cà chua, dưa lê, v.v. Họ không ngờ hoa lại hợp đất đến thế. Thấy hoa phát triển tốt, đem lại hiệu quả kinh tế cao hơn nhiều so với trồng lúa, trồng dưa, trồng cà, người dân Tây Tựu bảo nhau cùng chuyển đổi sang trồng hoa.</p><p style=\"text-align: justify;\">Làng hoa Tây Tựu với diện tích 200ha, du khách sẽ được chiêm ngưỡng xứ sở muôn hoa nhiều màu sắc, phong phú như: hoa cúc, hoa violet, hoa thược dược, v.v. toả hương thơm ngát.</p><p><img src=\"https://i.imgur.com/MNhGLzt.jpg\" style=\"width: 100%;\"/></p><h6 class=\"text-center\" style=\"text-align: center;\"><i><b>Một góc hình ảnh của vườn hoa Tây Tựu</b></i></h6><p><img src=\"https://i.imgur.com/qMEpg1K.jpg\" style=\"width: 100%;\"/></p><h6 class=\"text-center\" style=\"text-align: center;\"><i><b>Ảnh vườn hoa cúc trong làng hoa Tây Tựu</b></i></h6><p style=\"text-align: justify;\">Những luống hoa cúc thẳng tắp, nở rộ theo từng đoá lớn lấp lánh màu sắc hẳn sẽ làm du khách thích mê và ngây ngất trước vẻ đẹp lung linh của loài hoa rất đỗi quen thuộc, bình dị này. Đây là loài hoa ưa chuộng để cắm trên bàn thờ dịp Tết của người Việt.</p>');
 
 -- --------------------------------------------------------
 
@@ -596,7 +635,39 @@ INSERT INTO `tuong_tac` (`id`, `truong_tuong_tac`, `id_tuong_tac`, `ten_tuong_ta
 (48, NULL, NULL, NULL, 'đã xác nhận đã giao cho khách hóa đơn 8FC1A156-9956-11E9-9', 1, '2019-07-02 18:52:07'),
 (49, 'nhan_vien', 1, 'Bùi Tuấn Đạt', 'đã cập nhật người dùng', 1, '2019-07-15 13:42:39'),
 (50, NULL, NULL, NULL, 'đã xác nhận và tiến hành giao hóa đơn 93EAF3D4-A6CB-11E9-9', 1, '2019-07-15 13:43:32'),
-(51, NULL, NULL, NULL, 'đã hủy hóa đơn 3D7E94B0-A375-11E9-9', 1, '2019-07-15 13:43:54');
+(51, NULL, NULL, NULL, 'đã hủy hóa đơn 3D7E94B0-A375-11E9-9', 1, '2019-07-15 13:43:54'),
+(52, NULL, NULL, NULL, 'đã xác nhận và tiến hành giao hóa đơn 4B590751-D44E-11E9-9', 1, '2019-10-10 14:47:18'),
+(53, NULL, NULL, NULL, 'đã xác nhận và tiến hành giao hóa đơn 54187305-C4BC-11E9-9', 1, '2019-10-10 14:52:39'),
+(54, NULL, NULL, NULL, 'đã xác nhận và tiến hành giao hóa đơn 4B590751-D44E-11E9-9', 1, '2019-10-10 14:57:24'),
+(55, NULL, NULL, NULL, 'đã xác nhận và tiến hành giao hóa đơn 99DE2F78-9956-11E9-9', 1, '2019-10-10 14:58:37'),
+(56, NULL, NULL, NULL, 'đã xác nhận và tiến hành giao hóa đơn 99DE2F78-9956-11E9-9', 1, '2019-10-10 14:59:06'),
+(57, NULL, NULL, NULL, 'đã xác nhận và tiến hành giao hóa đơn 4B590751-D44E-11E9-9', 1, '2019-10-10 15:01:01'),
+(58, NULL, NULL, NULL, 'đã hoàn tác tiến hành giao hóa đơn 4B590751-D44E-11E9-9', 1, '2019-10-10 15:01:04'),
+(59, NULL, NULL, NULL, 'đã đổi tên danh mục sản phẩm Hoa sinh nhật thành Hoa sinh nhật', 1, '2019-10-10 15:01:51'),
+(60, 'san_pham', 3, 'Bình hoa tươi Nắng Yêu Thương', 'Đã thay đổi số lượng Nắng yêu thương thành 47 trong sản phẩm ', 1, '2019-10-10 16:09:15'),
+(61, 'san_pham', 3, 'Bình hoa tươi Nắng Yêu Thương', 'Đã thay đổi số lượng Nắng yêu thương thành 56 trong sản phẩm ', 1, '2019-10-10 16:09:20'),
+(62, 'san_pham', 3, 'Bình hoa tươi Nắng Yêu Thương', 'Đã thay đổi số lượng Nắng yêu thương thành 65 trong sản phẩm ', 1, '2019-10-10 16:09:23'),
+(63, 'san_pham', 3, 'Bình hoa tươi Nắng Yêu Thương', 'Đã thay đổi số lượng Cắm tròn hai mặt thành 67 trong sản phẩm ', 1, '2019-10-10 16:09:30'),
+(64, 'san_pham', 4, 'Bó hoa tươi Memory Of Love', 'Đã thay đổi số lượng Memory Of Love từ 59 thành 60 trong sản phẩm ', 1, '2019-10-10 16:11:32'),
+(65, 'san_pham', 3, 'Bình hoa tươi Nắng Yêu Thương', 'Đã thay đổi số lượng Cắm tròn hai mặt từ 67 thành 72 trong sản phẩm ', 1, '2019-10-10 16:19:08'),
+(66, 'san_pham', 3, 'Bình hoa tươi Nắng Yêu Thương', 'Đã thay đổi số lượng Nắng yêu thương từ 65 thành 72 trong sản phẩm ', 1, '2019-10-10 16:19:16'),
+(67, 'san_pham', 6, 'Kệ chúc mừng Phồn Vinh', 'Đã thay đổi số lượng Phồn Vinh từ 40 thành 41 trong sản phẩm ', 1, '2019-10-10 16:20:03'),
+(68, 'san_pham', 6, 'Kệ chúc mừng Phồn Vinh', 'Đã thay đổi số lượng Phồn Vinh từ 41 thành 41 trong sản phẩm ', 1, '2019-10-10 16:20:10'),
+(69, 'san_pham', 4, 'Bó hoa tươi Memory Of Love', 'đã sửa sản phẩm ', 1, '2019-10-10 20:56:03'),
+(70, 'san_pham', 15, 'Giỏ hoa tươi Khởi Đầu Mới', 'Đã thay đổi số lượng Cắm tròn hai mặt từ 50 thành 50 trong sản phẩm ', 1, '2019-10-10 21:00:23'),
+(71, NULL, NULL, NULL, 'đã hủy hóa đơn 4B590751-D44E-11E9-9', 1, '2019-10-10 21:18:45'),
+(72, NULL, NULL, NULL, 'đã cập nhật trang chủ ', 1, '2019-10-10 21:47:15'),
+(73, NULL, NULL, NULL, 'đã cập nhật trang chủ ', 1, '2019-10-10 22:01:18'),
+(74, NULL, NULL, NULL, 'đã cập nhật trang chủ ', 1, '2019-10-10 22:36:47'),
+(75, NULL, NULL, NULL, 'đã cập nhật trang chủ ', 1, '2019-10-10 22:37:36'),
+(76, NULL, NULL, NULL, 'đã cập nhật trang chủ ', 1, '2019-10-10 22:40:22'),
+(77, NULL, NULL, NULL, 'đã cập nhật trang chủ ', 1, '2019-10-10 22:40:28'),
+(78, NULL, NULL, NULL, 'đã cập nhật trang chủ ', 1, '2019-10-10 22:41:04'),
+(79, NULL, NULL, NULL, 'đã cập nhật trang chủ ', 1, '2019-10-10 22:41:10'),
+(80, NULL, NULL, NULL, 'đã cập nhật trang chủ ', 1, '2019-10-10 22:42:32'),
+(81, NULL, NULL, NULL, 'đã cập nhật trang chủ ', 1, '2019-10-10 22:44:11'),
+(82, NULL, NULL, NULL, 'đã cập nhật trang chủ ', 1, '2019-10-10 22:44:24'),
+(83, 'khuyen_mai', NULL, NULL, 'đã cập nhật trạng thái cho hóa đơn 0B77FA00-EC07-11E9-9', 1, '2019-10-11 17:06:53');
 
 --
 -- Triggers `tuong_tac`
@@ -689,11 +760,25 @@ ALTER TABLE `phan_hoi`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `qua_trinh_van_chuyen`
+--
+ALTER TABLE `qua_trinh_van_chuyen`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_HoaDon_QuaTrinhVanChuyen` (`id_hoa_don`),
+  ADD KEY `FK_TinhTrangHoaDon_QuaTrinhVanChuyen` (`id_tinh_trang`);
+
+--
 -- Indexes for table `san_pham`
 --
 ALTER TABLE `san_pham`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_DanhMuc_SanPham` (`id_danh_muc`);
+
+--
+-- Indexes for table `tinh_trang_hoa_don`
+--
+ALTER TABLE `tinh_trang_hoa_don`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `trang_chu`
@@ -748,13 +833,13 @@ ALTER TABLE `danh_muc`
 -- AUTO_INCREMENT for table `don_hang`
 --
 ALTER TABLE `don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `hoa_don`
 --
 ALTER TABLE `hoa_don`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `khuyen_mai`
@@ -781,16 +866,28 @@ ALTER TABLE `phan_hoi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `qua_trinh_van_chuyen`
+--
+ALTER TABLE `qua_trinh_van_chuyen`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `san_pham`
 --
 ALTER TABLE `san_pham`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
+-- AUTO_INCREMENT for table `tinh_trang_hoa_don`
+--
+ALTER TABLE `tinh_trang_hoa_don`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `trang_chu`
 --
 ALTER TABLE `trang_chu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tra_loi_danh_gia`
@@ -802,7 +899,7 @@ ALTER TABLE `tra_loi_danh_gia`
 -- AUTO_INCREMENT for table `tuong_tac`
 --
 ALTER TABLE `tuong_tac`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- Constraints for dumped tables
@@ -852,6 +949,13 @@ ALTER TABLE `kieu_san_pham`
 --
 ALTER TABLE `nhan_vien`
   ADD CONSTRAINT `FK_ChucVu_NhanVien` FOREIGN KEY (`id_chuc_vu`) REFERENCES `chuc_vu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `qua_trinh_van_chuyen`
+--
+ALTER TABLE `qua_trinh_van_chuyen`
+  ADD CONSTRAINT `FK_HoaDon_QuaTrinhVanChuyen` FOREIGN KEY (`id_hoa_don`) REFERENCES `hoa_don` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_TinhTrangHoaDon_QuaTrinhVanChuyen` FOREIGN KEY (`id_tinh_trang`) REFERENCES `tinh_trang_hoa_don` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `san_pham`

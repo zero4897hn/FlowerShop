@@ -33,10 +33,6 @@
     					<td class="card-text" style="width: 35%;">Ngày lập hóa đơn:</td>
                         <td class="card-text" style="width: 65%;">{{hoaDon.ngayLapDate | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
     				</tr>
-    				<tr>
-    					<td class="card-text" style="width: 35%;">Tình trạng:</td>
-                        <td class="card-text" style="width: 65%;">{{tinhTrangHoaDon[hoaDon.tinhTrang]}}</td>
-    				</tr>
                     <tr>
                         <td class="card-text" style="width: 35%;">Ghi chú:</td>
                         <td class="card-text" style="width: 65%;">{{hoaDon.ghiChu}}</td>
@@ -47,6 +43,22 @@
     				</tr>
     			</tbody>
     		</table>
+            <div class="card">
+                <div class="card-header">
+                    Quá trình vận chuyển
+                </div>
+                <div class="card-block">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="quaTrinh in hoaDon.danhSachQuaTrinh | orderBy: ngayDienRa : reverse">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{quaTrinh.tinhTrangHoaDon}}</h5>
+                                <small>{{quaTrinh.ngayDienRa | date: 'dd/MM/yyyy HH:mm:ss'}}</small>
+                            </div>
+                            <p class="mb-1" ng-if="quaTrinh.ghiChu != null">{{quaTrinh.ghiChu}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
     		<div class="card">
     			<div class="card-header">
     				Các đơn hàng đã đặt

@@ -1,9 +1,6 @@
 app.controller('ChiTietDonMuaController', function($http, $scope, $rootScope, $routeParams, $mdToast, $mdDialog, $location, $cookies, $window, $filter) {
 	var idHoaDon = $routeParams.idHoaDon;
 
-	$scope.tinhTrangHoaDon = ['Mới đặt', 'Đang giao', 'Đã giao'];
-	$scope.tinhTrangHoaDon[-1] = 'Đã hủy';
-
 	$http.post('/FlowerShop/api/get_hoa_don', angular.toJson({
 		idHoaDon: +idHoaDon
 	}), {

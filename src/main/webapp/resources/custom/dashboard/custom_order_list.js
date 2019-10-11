@@ -83,6 +83,49 @@ app.controller('OrderListController', function($http, $scope, $rootScope, $mdToa
 		console.log(error);
 	});
 
+	$scope.doiTrangThai = function(hoaDon) {
+		if (hoaDon.tinhTrangCanChuyen == undefined) return;
+		var confirm = $mdDialog.confirm()
+			.title('Thông báo')
+			.textContent('Xác nhận chuyển trạng thái đơn hàng?')
+			.ok('Xác nhận')
+			.cancel('Không');
+
+		$mdDialog.show(confirm).then(function() {
+			$http.post('/FlowerShop/api/doi_tinh_trang_hoa_don', angular.toJson({
+				idHoaDon: hoaDon.id,
+				tinhTrangCanChuyen: hoaDon.tinhTrangCanChuyen,
+				ghiChu: hoaDon.ghiChu
+			}), {
+				headers: {
+					'content-type': 'application/json;charset=UTF-8'
+				}
+			}).then(function(response) {
+				var notification = response.data.notice;
+				if (notification == 'success') {
+					var quaTrinh = response.data.qua_trinh;
+					quaTrinh.ngayDienRa = new Date();
+					hoaDon.danhSachQuaTrinh.push(quaTrinh);
+					$scope.showSimpleToast('Đổi trạng thái thành công.');
+				}
+				else $scope.showSimpleToast(notification);
+			}, function(error) {
+				console.log(error);
+			});
+		}, function() {
+		});
+	}
+
+	$http.post('/FlowerShop/api/get_danh_sach_tinh_trang_hoa_don', {
+		headers: {
+			'content-type': 'application/x-www-form-urlencoded;charset=UTF-8'
+		}
+	}).then(function(response) {
+		$scope.listTinhTrang = response.data;
+	}, function(error) {
+		console.log(error);
+	});
+
 	$scope.capNhatDanhSachHoaDon = function() {
 		$scope.trang = [];
 		$scope.soTrang = Math.ceil($scope.listHoaDon.length / $scope.soHoaDonMoiTrang);
@@ -167,100 +210,6 @@ app.controller('OrderListController', function($http, $scope, $rootScope, $mdToa
 				console.log(error);
 			});
 		}
-	}
-
-
-	$scope.tienHanhThaoTacVoiHoaDon = function(item) {
-		var textContent = $scope.thaoTacVoiHoaDon[item.tinhTrang] + '?';
-		if (item.tinhTrang == 1) textContent = textContent.concat(' Thao tác xong sẽ không thể hoàn tác.');
-		var confirm = $mdDialog.confirm()
-			.title('Thông báo')
-			.textContent(textContent)
-			.ok('Xác nhận')
-			.cancel('Không');
-
-		$mdDialog.show(confirm).then(function() {
-			$http.post('/FlowerShop/api/doi_tinh_trang_hoa_don', angular.toJson({
-				idHoaDon: item.id,
-				tinhTrang: item.tinhTrang + 1
-			}), {
-				headers: {
-					'content-type': 'application/json;charset=UTF-8'
-				}
-			}).then(function(response) {
-				var notification = response.data.notice;
-				if (notification == 'success') {
-					item.tinhTrang = item.tinhTrang + 1;
-				} else {
-					$scope.showSimpleToast(notification);
-				}
-			}, function(error) {
-				console.log(error);
-			});
-		}, function() {
-
-		});
-	}
-
-	$scope.hoanTacHoaDon = function(item) {
-		var confirm = $mdDialog.confirm()
-			.title('Thông báo')
-			.textContent('Xác nhận hoàn tác hóa đơn?')
-			.ok('Xác nhận')
-			.cancel('Không');
-
-		$mdDialog.show(confirm).then(function() {
-			$http.post('/FlowerShop/api/doi_tinh_trang_hoa_don', angular.toJson({
-				idHoaDon: item.id,
-				tinhTrang: item.tinhTrang - 1
-			}), {
-				headers: {
-					'content-type': 'application/json;charset=UTF-8'
-				}
-			}).then(function(response) {
-				var notification = response.data.notice;
-				if (notification == 'success') {
-					item.tinhTrang = item.tinhTrang - 1;
-				} else {
-					$scope.showSimpleToast(notification);
-				}
-			}, function(error) {
-				console.log(error);
-			});
-		}, function() {
-
-		});
-	}
-
-	$scope.huyHoaDon = function(item) {
-		var confirm = $mdDialog.confirm()
-			.title('Thông báo')
-			.textContent('Xác nhận hủy hóa đơn? Thao tác xong sẽ không thể hoàn tác.')
-			.ok('Xác nhận')
-			.cancel('Không');
-
-		$mdDialog.show(confirm).then(function() {
-			$http.post('/FlowerShop/api/doi_tinh_trang_hoa_don', angular.toJson({
-				idHoaDon: item.id,
-				tinhTrang: -1
-			}), {
-				headers: {
-					'content-type': 'application/json;charset=UTF-8'
-				}
-			}).then(function(response) {
-				var notification = response.data.notice;
-				if (notification == 'success') {
-					item.tinhTrang = -1;
-					$scope.showSimpleToast('Hủy thành công.');
-				} else {
-					$scope.showSimpleToast(notification);
-				}
-			}, function(error) {
-				console.log(error);
-			});
-		}, function() {
-
-		});
 	}
 
 	$scope.danhDauChuaDoc = function(item) {

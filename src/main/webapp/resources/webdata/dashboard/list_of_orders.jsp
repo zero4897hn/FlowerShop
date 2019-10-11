@@ -59,10 +59,6 @@
 		                        <td class="card-text" style="width: 65%;">{{hoaDon.ngayLapDate | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
 		    				</tr>
 		    				<tr>
-		    					<td class="card-text" style="width: 35%;">Tình trạng:</td>
-		                        <td class="card-text" style="width: 65%;">{{tinhTrangHoaDon[hoaDon.tinhTrang]}}</td>
-		    				</tr>
-		    				<tr>
 		    					<td class="card-text" style="width: 35%;">Ghi chú:</td>
 		                        <td class="card-text" style="width: 65%;">{{hoaDon.ghiChu}}</td>
 		    				</tr>
@@ -72,6 +68,22 @@
 		    				</tr>
 		    			</tbody>
 		    		</table>
+		    		<div class="card">
+		                <div class="card-header">
+		                    Quá trình vận chuyển
+		                </div>
+		                <div class="card-block">
+		                    <ul class="list-group">
+		                        <li class="list-group-item" ng-repeat="quaTrinh in hoaDon.danhSachQuaTrinh | orderBy: ngayDienRa : reverse">
+		                            <div class="d-flex w-100 justify-content-between">
+		                                {{quaTrinh.ngayDienRa | date: 'dd/MM/yyyy HH:mm:ss'}} - 
+		                                {{quaTrinh.tinhTrangHoaDon}}
+		                            </div>
+		                            <p class="mb-1" ng-if="quaTrinh.ghiChu != null">{{quaTrinh.ghiChu}}</p>
+		                        </li>
+		                    </ul>
+		                </div>
+		            </div>
 		    		<div class="card">
 		    			<div class="card-header">
 		    				Các đơn hàng đã đặt
@@ -103,10 +115,22 @@
 							</table>
 						</div>
 		    		</div>
-		    		<button class="btn btn-primary" ng-if="hoaDon.tinhTrang > -1 && hoaDon.tinhTrang < 2" ng-click="tienHanhThaoTacVoiHoaDon(hoaDon)">{{thaoTacVoiHoaDon[hoaDon.tinhTrang]}}</button>
-		    		<button class="btn btn-danger" ng-if="hoaDon.tinhTrang == 1" ng-click="hoanTacHoaDon(hoaDon)">Hoàn tác</button>
-		    		<button class="btn btn-warning" ng-if="hoaDon.tinhTrang > -1 && hoaDon.tinhTrang < 2" ng-click="huyHoaDon(hoaDon)">Hủy hóa đơn</button>
-		    		<button class="btn btn-toolbar" ng-click="xuatHoaDon(hoaDon)" style="margin: auto;" ng-if="hoaDon.tinhTrang > -1">Xuất hóa đơn</button>
+		    		<div class="row">
+		    			<div class="col-xs-8">
+							<div class="input-group">
+								<select class="form-control" ng-model="hoaDon.tinhTrangCanChuyen" style="width: 50%">
+									<option ng-repeat="tinhTrang in listTinhTrang" ng-value="tinhTrang.id">{{tinhTrang.tenTinhTrang}}</option>
+								</select>
+								<input type="text" class="form-control" style="width: 50%" ng-model="hoaDon.ghiChu" placeholder="Nhập ghi chú">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button" ng-click="doiTrangThai(hoaDon)">Đổi trạng thái</button>
+								</span>
+							</div>
+		    			</div>
+		    			<div class="col-xs-4">
+		    				<button class="btn btn-toolbar" ng-click="xuatHoaDon(hoaDon)" style="margin: auto;">Xuất hóa đơn</button>
+		    			</div>
+		    		</div>
 				</div>
 			</div>
 		</div>
