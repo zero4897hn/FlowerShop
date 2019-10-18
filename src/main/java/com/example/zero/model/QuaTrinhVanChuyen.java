@@ -44,8 +44,8 @@ public class QuaTrinhVanChuyen {
 	public void setHoaDon(HoaDon hoaDon) {
 		this.hoaDon = hoaDon;
 	}
-	public String getTinhTrangHoaDon() {
-		return tinhTrangHoaDon.getTenTinhTrang();
+	public TinhTrangHoaDon getTinhTrangHoaDon() {
+		return tinhTrangHoaDon;
 	}
 	public void setTinhTrangHoaDon(TinhTrangHoaDon tinhTrangHoaDon) {
 		this.tinhTrangHoaDon = tinhTrangHoaDon;

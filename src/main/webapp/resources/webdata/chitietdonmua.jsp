@@ -51,8 +51,8 @@
                     <ul class="list-group">
                         <li class="list-group-item" ng-repeat="quaTrinh in hoaDon.danhSachQuaTrinh | orderBy: ngayDienRa : reverse">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">{{quaTrinh.tinhTrangHoaDon}}</h5>
-                                <small>{{quaTrinh.ngayDienRa | date: 'dd/MM/yyyy HH:mm:ss'}}</small>
+                                <h5 class="mb-1">{{ quaTrinh.tinhTrangHoaDon.tenTinhTrang }}</h5>
+                                <small>{{ quaTrinh.ngayDienRa | date: 'dd/MM/yyyy HH:mm:ss' }}</small>
                             </div>
                             <p class="mb-1" ng-if="quaTrinh.ghiChu != null">{{quaTrinh.ghiChu}}</p>
                         </li>

@@ -161,8 +161,8 @@ app.controller('ProductListController', function($http, $scope, $rootScope, $mdD
 		item.danhSachKieuSanPham.forEach(function(value) {
 			value.giaTien = $scope.getGiaKhuyenMai(value);
 		});
-		item.giaCaoNhat = Math.max.apply(Math, item.danhSachKieuSanPham.map(function(o) { return o.giaTien; }))
-		item.giaThapNhat = Math.min.apply(Math, item.danhSachKieuSanPham.map(function(o) { return o.giaTien; }))
+		item.giaCaoNhat = Math.max.apply(Math, item.danhSachKieuSanPham.map(function(o) { return o.giaTien; }));
+		item.giaThapNhat = Math.min.apply(Math, item.danhSachKieuSanPham.map(function(o) { return o.giaTien; }));
 	}
 
 	$scope.suaSanPham = function(item) {

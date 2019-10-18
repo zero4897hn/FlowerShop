@@ -76,8 +76,8 @@
 		                    <ul class="list-group">
 		                        <li class="list-group-item" ng-repeat="quaTrinh in hoaDon.danhSachQuaTrinh | orderBy: ngayDienRa : reverse">
 		                            <div class="d-flex w-100 justify-content-between">
-		                                {{quaTrinh.ngayDienRa | date: 'dd/MM/yyyy HH:mm:ss'}} - 
-		                                {{quaTrinh.tinhTrangHoaDon}}
+		                                {{ quaTrinh.ngayDienRa | date: 'dd/MM/yyyy HH:mm:ss' }} - 
+		                                {{ quaTrinh.tinhTrangHoaDon.tenTinhTrang }}
 		                            </div>
 		                            <p class="mb-1" ng-if="quaTrinh.ghiChu != null">{{quaTrinh.ghiChu}}</p>
 		                        </li>
@@ -116,7 +116,7 @@
 						</div>
 		    		</div>
 		    		<div class="row">
-		    			<div class="col-xs-8">
+		    			<div class="col-xs-8" ng-if="hoaDon.quaTrinhGanNhat.tinhTrangHoaDon.id != 5 && hoaDon.quaTrinhGanNhat.tinhTrangHoaDon.id != 6">
 							<div class="input-group">
 								<select class="form-control" ng-model="hoaDon.tinhTrangCanChuyen" style="width: 50%">
 									<option ng-repeat="tinhTrang in listTinhTrang" ng-value="tinhTrang.id">{{tinhTrang.tenTinhTrang}}</option>

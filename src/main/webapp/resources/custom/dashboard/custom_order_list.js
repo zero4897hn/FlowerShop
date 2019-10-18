@@ -85,9 +85,11 @@ app.controller('OrderListController', function($http, $scope, $rootScope, $mdToa
 
 	$scope.doiTrangThai = function(hoaDon) {
 		if (hoaDon.tinhTrangCanChuyen == undefined) return;
+		var confirmText = (hoaDon.tinhTrangCanChuyen == 5 || hoaDon.tinhTrangCanChuyen == 6)?
+			'Xác nhận chuyển trạng thái đơn hàng? Khi chuyển trạng thái này sẽ không thể chuyển lần nữa.' : 'Xác nhận chuyển trạng thái đơn hàng?';
 		var confirm = $mdDialog.confirm()
 			.title('Thông báo')
-			.textContent('Xác nhận chuyển trạng thái đơn hàng?')
+			.textContent(confirmText)
 			.ok('Xác nhận')
 			.cancel('Không');
 
@@ -104,9 +106,11 @@ app.controller('OrderListController', function($http, $scope, $rootScope, $mdToa
 				var notification = response.data.notice;
 				if (notification == 'success') {
 					var quaTrinh = response.data.qua_trinh;
-					quaTrinh.ngayDienRa = new Date();
+					quaTrinh.ngayDienRa = new Date().getTime();
 					hoaDon.danhSachQuaTrinh.push(quaTrinh);
+					hoaDon.quaTrinhGanNhat = $scope.getQuaTrinhGanNhat(hoaDon);
 					$scope.showSimpleToast('Đổi trạng thái thành công.');
+					console.log(hoaDon);
 				}
 				else $scope.showSimpleToast(notification);
 			}, function(error) {
@@ -253,6 +257,14 @@ app.controller('OrderListController', function($http, $scope, $rootScope, $mdToa
 		var date = new Date(hoaDon.ngayLap);
 		//hoaDon.ngayLap = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()));
 		hoaDon.ngayLapDate = date;
+		
+		hoaDon.quaTrinhGanNhat = $scope.getQuaTrinhGanNhat(hoaDon);
+	}
+
+	$scope.getQuaTrinhGanNhat = function(hoaDon) {
+		var recentDate = new Date(Math.max.apply(Math, hoaDon.danhSachQuaTrinh.map(function(o) { return o.ngayDienRa; })));
+		var quaTrinhGanNhat = $filter('filter')(hoaDon.danhSachQuaTrinh, { ngayDienRa: recentDate.getTime() })[0];
+		return quaTrinhGanNhat;
 	}
 
 	$scope.getGiaKhuyenMai = function(kieuSanPham, hoaDon) {

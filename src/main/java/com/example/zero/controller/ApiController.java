@@ -1073,7 +1073,17 @@ public class ApiController {
 				QuaTrinhVanChuyen quaTrinhVanChuyen = new QuaTrinhVanChuyen();
 				TinhTrangHoaDon tinhTrangHoaDon = null;
 				if (jsonNode.has("tinhTrangCanChuyen")) {
-					tinhTrangHoaDon = tinhTrangHoaDonDAO.getById(jsonNode.get("tinhTrangCanChuyen").asInt());
+					int idTinhTrang = jsonNode.get("tinhTrangCanChuyen").asInt();
+					tinhTrangHoaDon = tinhTrangHoaDonDAO.getById(idTinhTrang);
+					if (idTinhTrang == 6) {
+						List<DonHang> danhSachDonHang = hoaDon.getDanhSachDonHang();
+						for (DonHang donHang : danhSachDonHang) {
+							KieuSanPham kieuSanPham = donHang.getKieuSanPham();
+							kieuSanPham.setSoLuong(kieuSanPham.getSoLuong() + donHang.getSoLuong());
+							kieuSanPham.setLuongMua(kieuSanPham.getLuongMua() - 1);
+							kieuSanPhamDAO.capNhatKieuSanPham(kieuSanPham);
+						}
+					}
 				}
 				quaTrinhVanChuyen.setTinhTrangHoaDon(tinhTrangHoaDon);
 				if (jsonNode.has("ghiChu") && !jsonNode.get("ghiChu").asText().equals("null")) {
